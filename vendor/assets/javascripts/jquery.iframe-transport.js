@@ -211,8 +211,7 @@
             // Now that the load handler has been set up, reconfigure and
             // submit the form.
             form.attr("action", options.url)
-              .attr("target", 
-              .attr("name"))
+              .attr("target", iframe.attr("name"))
               .attr("enctype", "multipart/form-data")
               .get(0).submit();
           });
