@@ -175,8 +175,12 @@
         // The `send` function is called by jQuery when the request should be
         // sent.
         send: function(headers, completeCallback) {
+          var documentDomain = "";
+          if (document.domain) {
+            documentDomain = "<html><head><script>document.domain='"+ document.domain + "'; </script></head></html>";
+          }
           iframe = $("<iframe src='javascript:false;' name='iframe-" + $.now()
-            + "' style='display:none'></iframe>");
+            + "' style='display:none'>" + documentDomain + "</iframe>");
 
           // The first load event gets fired after the iframe has been injected
           // into the DOM, and is used to prepare the actual submission.
@@ -207,7 +211,8 @@
             // Now that the load handler has been set up, reconfigure and
             // submit the form.
             form.attr("action", options.url)
-              .attr("target", iframe.attr("name"))
+              .attr("target", 
+              .attr("name"))
               .attr("enctype", "multipart/form-data")
               .get(0).submit();
           });
